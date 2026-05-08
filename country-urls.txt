@@ -1,0 +1,11 @@
+# Country App URLs Configuration
+# Format: CountryName=URL
+# Leave empty or comment out (with #) to disable a country
+# One country per line
+
+Australia=https://ausstd.officestoolsai.com/
+
+# Add more countries below:
+# United States=https://us-app.example.com
+# Canada=https://ca-app.example.com
+

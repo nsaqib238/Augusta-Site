@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RAG vs General AI Chatbots – Honest FAQ</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css?v=5">
+</head>
+<body>
+    <div class="modern-page marketing-page">
+        <header class="modern-nav">
+            <div class="modern-nav-inner">
+                <div class="modern-nav-left">
+                    <a href="index.html#home" class="modern-logo-link">
+                        <img src="img/NewOfficetools.png?v=4" alt="Augusta Search" class="modern-logo-img">
+                    </a>
+                    <div class="modern-logo-sub">Evidence-grade AI for codes & standards</div>
+                </div>
+                <nav class="modern-nav-links">
+                    <a href="index.html#home">Overview</a>
+                    <a href="index.html#core">Core capabilities</a>
+                    <a href="index.html#mission">Mission</a>
+                    <a href="index.html#services">Services</a>
+                    <a href="marketing.html" class="active">Marketing FAQ</a>
+                    <a href="index.html#contact">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="modern-main marketing-main">
+            <section class="marketing-hero">
+                <div class="modern-content marketing-hero__inner">
+                    <p class="modern-section-kicker">Honest comparison</p>
+                    <h1>RAG vs General AI Chatbots – Honest FAQ</h1>
+                    <p class="marketing-hero__lead">
+                        These answers reflect what Augusta Search delivers today. No hype—just the facts engineers ask before adopting compliance-grade AI.
+                    </p>
+                    <div class="marketing-hero__actions">
+                        <a href="index.html#services" class="btn btn-primary hero-cta">Explore the platform</a>
+                        <a href="mailto:najam@rag-ai.net?subject=RAG%20FAQ%20Follow-up" class="btn hero-secondary">Ask us anything</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="modern-content faq-section">
+                <div class="modern-section-header">
+                    <div>
+                        <div class="modern-section-kicker">Top questions</div>
+                        <h2 class="modern-section-title">What makes the RAG workflow different?</h2>
+                    </div>
+                    <p class="modern-section-sub">Direct comparisons against generic chatbots so you can evaluate the workflow without marketing fluff.</p>
+                </div>
+                <div class="faq-grid">
+                    <article class="faq-card">
+                        <h3>1️⃣ Why use this RAG app instead of uploading AS3000 to a general AI chatbot?</h3>
+                        <ul>
+                            <li>A general-purpose chatbot can read a single PDF you paste, but it forgets it after the session and may lose context for 500+ page codes.</li>
+                            <li>Our app stores your uploaded AS/NZS standards inside Supabase storage, chunks them clause-by-clause, and keeps them ready for every query.</li>
+                            <li>Retrieval is deterministic: every answer is tied to a stored clause/table/figure so you can see where it came from.</li>
+                        </ul>
+                    </article>
+                    <article class="faq-card">
+                        <h3>2️⃣ Does the RAG workflow really improve clause accuracy?</h3>
+                        <ul>
+                            <li>It can improve accuracy by retrieving specific clauses before generating answers. Before generating an answer we run multi-search (BM25, semantic, exact match) on the indexed clauses and tables.</li>
+                            <li>The assistant only sees the top chunks + metadata, so the response cites the clause numbers that were actually retrieved.</li>
+                            <li>However, accuracy depends on correct retrieval and the LLM may still make errors.</li>
+                        </ul>
+                    </article>
+                    <article class="faq-card">
+                        <h3>3️⃣ Does this reduce hallucinations compared to plain generic chatbots?</h3>
+                        <ul>
+                            <li>It can reduce hallucinations by constraining answers to retrieved chunks and we show the citations in the UI.</li>
+                            <li>It can still make mistakes if the wrong clause is retrieved, and while it is less likely to invent page numbers compared to an unconstrained chatbot session, errors are still possible.</li>
+                        </ul>
+                    </article>
+                    <article class="faq-card">
+                        <h3>4️⃣ Can non‑engineers benefit?</h3>
+                        <ul>
+                            <li>Yes. The UI shows the raw clause excerpt plus a plain-English explanation, so you can double-check the source even if you are new to the code.</li>
+                            <li>A general chatbot can do this only if you manually paste the clause each time; here the retrieval step is automatic.</li>
+                        </ul>
+                    </article>
+                    <article class="faq-card">
+                        <h3>5️⃣ Is it faster for daily professional use?</h3>
+                        <ul>
+                            <li>Yes. Once a company uploads AS1668/AS4254/etc., the documents stay in your library.</li>
+                            <li>Search is instant, invitations let teams share the same corpus, and every answer includes clause, table, exception context—no re-uploading.</li>
+                        </ul>
+                    </article>
+                    <article class="faq-card">
+                        <h3>6️⃣ Can I upload multiple large standards?</h3>
+                        <ul>
+                            <li>Yes. The current uploader accepts PDF files (AS/NZS standards, NCC volumes, manuals, project specs, etc.) up to the configured Max File Size (default 80&nbsp;MB).</li>
+                            <li>Each file is stored with metadata (discipline, company) so you can keep multiple codes or amendments side by side.</li>
+                        </ul>
+                    </article>
+                    <article class="faq-card">
+                        <h3>7️⃣ Is it better with numbers (mm², IP ratings, clearances)?</h3>
+                        <ul>
+                            <li>In practice, yes. Because the raw text chunk is included in the prompt, the LLM quotes the exact table row or note.</li>
+                            <li>That reduces the risk of altered figures compared to asking a generic chatbot to recall numbers from training data.</li>
+                        </ul>
+                    </article>
+                    <article class="faq-card">
+                        <h3>8️⃣ Can it track versions (AS3000:2018 vs Amendments)?</h3>
+                        <ul>
+                            <li>Yes—as long as you upload each version (e.g., <code>AS3000-2018.pdf</code>, <code>AS3000-Amd2.pdf</code>). The system stores each file separately, so retrieval tells you which document the clause came from.</li>
+                            <li>General chatbots cannot guarantee which edition they "remember."</li>
+                        </ul>
+                    </article>
+                    <article class="faq-card">
+                        <h3>9️⃣ When is a plain chatbot enough?</h3>
+                        <ul>
+                            <li>If you just need high-level summaries, concept explanations, or you're pasting a short clause manually, a general chatbot alone is fine.</li>
+                            <li>RAG is meant for compliance-grade answers where evidence matters.</li>
+                        </ul>
+                    </article>
+                    <article class="faq-card">
+                        <h3>🔟 Is the RAG app worth it?</h3>
+                        <ul>
+                            <li>Worth it if you are an engineer, consultant, estimator, trainer, or compliance lead who needs traceable, clause-level answers every day.</li>
+                            <li>Not worth it if you rarely touch standards or are comfortable with approximate answers.</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section class="modern-content summary-panel">
+                <div class="modern-section-header">
+                    <div>
+                        <div class="modern-section-kicker">Fair summary</div>
+                        <h2 class="modern-section-title">Balanced takeaways before you decide</h2>
+                    </div>
+                </div>
+                <ul class="summary-list">
+                    <li>General chatbots are fine for casual or one-off questions where you paste a small snippet yourself.</li>
+                    <li>This RAG stack is better whenever you need clause-level accuracy, citations, and repeatable searches across hundreds of pages.</li>
+                    <li>Choose RAG only if you work with codes regularly or need evidence-grade answers; otherwise the extra workflow adds unnecessary overhead.</li>
+                </ul>
+            </section>
+
+            <section class="modern-content marketing-cta">
+                <div class="marketing-cta__content">
+                    <h3>Ready to see clause-level AI in action?</h3>
+                    <p>Upload a standard for a live walkthrough or schedule a 15-minute Q&A session.</p>
+                </div>
+                <div class="marketing-cta__actions">
+                    <a href="mailto:najam@rag-ai.net?subject=Schedule%20a%20RAG%20Demo" class="modern-link-button modern-link-primary">Book a demo</a>
+                    <a href="index.html#services" class="modern-link-button">View product overview</a>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="new-footer">
+            <div class="new-footer-inner">
+                <div class="new-footer-content">
+                    <!-- Left: Brand -->
+                    <div class="new-footer-brand">
+                        <div class="new-footer-brand-title">
+                            Augusta Search
+                        </div>
+                        <p class="new-footer-brand-description">
+                            AI-powered engineering code intelligence for professionals in
+                            compliance, design, and construction.
+                        </p>
+                        <p class="new-footer-location" style="margin-top: 8px; font-size: 13px; color: #6b7280;">
+                            Operating globally · Based in Australia
+                        </p>
+                        <p class="new-footer-copyright">
+                            © 2024 Augusta Search. All rights reserved.
+                        </p>
+                    </div>
+
+                    <!-- Right: Links -->
+                    <div class="new-footer-links">
+                        <a href="disclaimer.html">Disclaimer</a>
+                        <a href="mailto:najam@rag-ai.net" class="footer-email">
+                            najam@rag-ai.net
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+
