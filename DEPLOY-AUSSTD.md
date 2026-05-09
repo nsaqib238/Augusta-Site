@@ -1,29 +1,33 @@
-# Deploy `ausstd.augustasearch.com` (simple)
+# Deploy `ausstd.augustasearch.com` (Australia app only)
 
-This project is a **static** site (HTML/CSS/JS). No build step.
+**This subdomain is not your main marketing site.**  
+`augustasearch.com` / `www` stay on Squarespace (or wherever you host the landing page).  
+**`ausstd.augustasearch.com`** is only for your **Australia product/app** — deploy **that** project’s files here, **not** the Augusta-Site marketing repo.
 
-**Important:** DNS for `ausstd` must point to **the same IPv4** your VPS uses on the public internet. On the VPS run:
+Stack on the VPS below assumes you serve **static files** from a folder (`index.html` or a built `dist/`). If your Australia app is Node/Python/docker, use a **reverse proxy** in nginx instead (different snippet).
+
+**Important:** DNS for `ausstd` must point to **the same IPv4** your VPS uses on the public internet:
 
 ```bash
 curl -4 ifconfig.me
 ```
 
-Use that value in Squarespace. If `nslookup ausstd.augustasearch.com` shows a **different** IP, Let’s Encrypt will fail with a **connection timeout** (it talks to the IP in DNS, not your SSH session).
+If `nslookup ausstd.augustasearch.com` shows a **different** IP, Let’s Encrypt will fail (connection timeout).
 
 ---
 
 ## 1) Squarespace DNS
 
-Keep Squarespace defaults for `@` and `www` (so your main landing site stays on Squarespace).
+Keep Squarespace defaults for `@` and `www` (landing site unchanged).
 
-Add 1 record:
+Add:
 
 - **Type**: `A`
 - **Name**: `ausstd`
-- **Data**: **same IPv4 as** `curl -4 ifconfig.me` **on this VPS**
+- **Data**: same IPv4 as `curl -4 ifconfig.me` on this VPS
 - **TTL**: default (4 hrs is fine)
 
-Wait a few minutes and verify (**must match `curl`**):
+Verify:
 
 ```bash
 curl -4 ifconfig.me
@@ -32,44 +36,41 @@ nslookup ausstd.augustasearch.com
 
 ---
 
-## 2) VPS setup (Ubuntu/Debian)
-
-SSH to VPS:
+## 2) VPS packages (Ubuntu/Debian)
 
 ```bash
-ssh <your-user>@<same-ip-as-above>
-```
-
-Install packages:
-
-```bash
+ssh <your-user>@<your-vps-ip>
 sudo apt update
 sudo apt install -y nginx git certbot python3-certbot-nginx
 ```
 
 ---
 
-## 3) Deploy the site files
+## 3) Put your **Australia app** on the server
+
+Create the web root, then copy or clone **your Australia app** (replace with your real repo or upload path):
 
 ```bash
 sudo mkdir -p /var/www/ausstd
 sudo chown -R "$USER":"$USER" /var/www/ausstd
 cd /var/www/ausstd
-git clone https://github.com/nsaqib238/Augusta-Site.git .
+# Example — use YOUR Australia app repo, not the marketing site:
+# git clone https://github.com/YOUR_ORG/your-australia-app.git .
+# Or: rsync/scp your build output here so index.html (or the app entry) is under /var/www/ausstd
 sudo chown -R www-data:www-data /var/www/ausstd
 ```
 
+If the app builds to a subfolder (e.g. `dist/`), set nginx `root` to that path in section 4.
+
 ---
 
-## 4) nginx config
-
-Create file:
+## 4) nginx
 
 ```bash
 sudo nano /etc/nginx/sites-available/ausstd.augustasearch.com
 ```
 
-Paste **only** what is inside the block below — **do not** paste the triple-backtick lines (markdown). If nginx says `unknown directive`, you pasted those by mistake.
+Paste **only** the lines below (no markdown backticks):
 
 ```
 server {
@@ -96,37 +97,26 @@ sudo systemctl reload nginx
 
 ---
 
-## 5) HTTPS (Let’s Encrypt)
+## 5) HTTPS
 
 ```bash
 sudo certbot --nginx -d ausstd.augustasearch.com
-```
-
-Test auto-renew:
-
-```bash
 sudo certbot renew --dry-run
 ```
 
 ---
 
-## 6) Update later (when repo changes)
+## 6) Update when your Australia app changes
 
 ```bash
 cd /var/www/ausstd
-sudo git pull origin main
+sudo git pull   # if you used git
 sudo chown -R www-data:www-data /var/www/ausstd
 sudo systemctl reload nginx
 ```
 
 ---
 
-## Add next country (same steps)
+## Other countries later (`usstd`, etc.)
 
-For example `usstd.augustasearch.com`:
-
-- DNS: add `A` record **Name** `usstd` → **Data**: same VPS IPv4 (`curl -4 ifconfig.me`)
-- VPS: repeat sections 3–5 but replace `ausstd` with `usstd` in:
-  - `/var/www/usstd`
-  - `/etc/nginx/sites-available/usstd.augustasearch.com`
-  - `certbot --nginx -d usstd.augustasearch.com`
+Same pattern: new **`A`** record, new folder `/var/www/usstd`, new nginx `server_name`, new certbot `-d`.

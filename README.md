@@ -22,16 +22,11 @@ A modern, responsive business website for Augusta Search. Built with HTML, CSS, 
 
 ## Getting Started
 
+**Production (www + apex on your VPS):** see [`DEPLOY-WWW.md`](DEPLOY-WWW.md).
 
-cd /home/ragadmin/ragadmin/projects/officesitemain
-git pull origin main
-sudo cp -r /home/ragadmin/ragadmin/projects/officesitemain/* /var/www/augusta-search/
-sudo chown -R www-data:www-data /var/www/augusta-search
-sudo systemctl reload nginx
+**Australia app subdomain only:** see [`DEPLOY-AUSSTD.md`](DEPLOY-AUSSTD.md).
 
-
-
-### View the Website
+### View the Website (local)
 
 Simply open `index.html` in your web browser, or use a local server:
 
