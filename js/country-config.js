@@ -12,7 +12,7 @@ const COUNTRY_URLS = {
     "Algeria": "",
     "Angola": "",
     "Argentina": "",
-    "Australia": "https://ausstd.officestoolsai.com/", // Australia app URL
+    "Australia": "https://ausstd.augustasearch.com/", // Australia app URL
     "Austria": "",
     "Bahrain": "",
     "Bangladesh": "",

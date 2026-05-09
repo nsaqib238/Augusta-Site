@@ -80,10 +80,22 @@ function initCountryDropdown() {
     setTimeout(populateCountryDropdown, 500);
 }
 
+function attachCountrySelectRedirect() {
+    var select = document.getElementById('countrySelect');
+    if (!select) return;
+
+    select.addEventListener('change', function () {
+        var url = (select.value || '').trim();
+        if (!url) return;
+        window.location.href = url;
+    });
+}
+
 // Smooth scrolling for navigation links
 $(document).ready(function() {
     // Populate country dropdown
     populateCountryDropdown();
+    attachCountrySelectRedirect();
     
     // Smooth scroll
     $('a[href*="#"]:not([href="#"])').click(function() {
