@@ -2,9 +2,13 @@
 
 This project is a **static** site (HTML/CSS/JS). No build step.
 
-Your Contabo VPS public IP (from `curl -4 ifconfig.me`) is:
+**Important:** DNS for `ausstd` must point to **the same IPv4** your VPS uses on the public internet. On the VPS run:
 
-- `213.199.49.23`
+```bash
+curl -4 ifconfig.me
+```
+
+Use that value in Squarespace. If `nslookup ausstd.augustasearch.com` shows a **different** IP, Let’s Encrypt will fail with a **connection timeout** (it talks to the IP in DNS, not your SSH session).
 
 ---
 
@@ -16,12 +20,13 @@ Add 1 record:
 
 - **Type**: `A`
 - **Name**: `ausstd`
-- **Data**: `213.199.49.23`
+- **Data**: **same IPv4 as** `curl -4 ifconfig.me` **on this VPS**
 - **TTL**: default (4 hrs is fine)
 
-Wait a few minutes and verify:
+Wait a few minutes and verify (**must match `curl`**):
 
 ```bash
+curl -4 ifconfig.me
 nslookup ausstd.augustasearch.com
 ```
 
@@ -32,7 +37,7 @@ nslookup ausstd.augustasearch.com
 SSH to VPS:
 
 ```bash
-ssh <your-user>@213.199.49.23
+ssh <your-user>@<same-ip-as-above>
 ```
 
 Install packages:
@@ -120,7 +125,7 @@ sudo systemctl reload nginx
 
 For example `usstd.augustasearch.com`:
 
-- DNS: add `A` record **Name** `usstd` → **Data** `213.199.49.23`
+- DNS: add `A` record **Name** `usstd` → **Data**: same VPS IPv4 (`curl -4 ifconfig.me`)
 - VPS: repeat sections 3–5 but replace `ausstd` with `usstd` in:
   - `/var/www/usstd`
   - `/etc/nginx/sites-available/usstd.augustasearch.com`
